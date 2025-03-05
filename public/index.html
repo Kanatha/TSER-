@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+
+        async function getWattage() {
+            
+            const response = await fetch("/status");
+            data = await response.json();
+            console.log(data.apower);
+            
+            document.getElementById("wattage").innerText = data.apower + " W"
+            
+
+            
+
+        }
+
+        getWattage()
+        setInterval(getWattage, 1000);
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Shelly stats</title>
+
+    <style>
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+
+        <div class="wattage">
+
+            <h1>wattage: </h1>
+            <h1 id="wattage"></h1>
+
+        </div>
+
+    </div>
+</body>
+</html>
