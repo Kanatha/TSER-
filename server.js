@@ -43,21 +43,24 @@ const getData = async () => {
   return [tarifa.tarifa, power.apower];
 };
 
-app.get("/status", async (req, res) => {
-  const data = await getData();
-  res.json(data[1]);
+app.get("/status", (req, res) => {
+  setTimeout(async () => {
+    const data = await getData();
+    res.json({ power: data[1], tarifa: data[0] });
+  }, 3000);
 });
 
 setInterval(async () => {
   const data = await getData();
-
   writeTable(data[1], data[0]);
 }, 5000);
 
-app.get("/data", async (req, res) => {
-  const tableData = await readTable();
-  console.log(tableData);
-  res.json(tableData);
+app.get("/data", (req, res) => {
+  setTimeout(async () => {
+    const tableData = await readTable();
+    console.log("get request from client");
+    res.json(tableData);
+  }, 3000);
 });
 
 app.listen(port, () => {
